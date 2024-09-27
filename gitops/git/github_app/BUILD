@@ -6,7 +6,7 @@ go_library(
     importpath = "github.com/fasterci/rules_gitops/gitops/git/github_app",
     visibility = ["//visibility:public"],
     deps = [
-        "//vendor/github.com/google/go-github/v32/github:go_default_library",
-        "//vendor/golang.org/x/oauth2:go_default_library",
+        "//vendor/github.com/bradleyfalzon/ghinstallation/v2:go_default_library",
+        "//vendor/github.com/google/go-github/v58/github:go_default_library",
     ],
 )
