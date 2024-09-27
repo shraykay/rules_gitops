@@ -29,8 +29,8 @@ import (
 	"github.com/fasterci/rules_gitops/gitops/git"
 	"github.com/fasterci/rules_gitops/gitops/git/bitbucket"
 	"github.com/fasterci/rules_gitops/gitops/git/github"
+	"github.com/fasterci/rules_gitops/gitops/git/github_app"
 	"github.com/fasterci/rules_gitops/gitops/git/gitlab"
-	"github.com/nazzzzz/rules_gitops/gitops/git/github_app"
 
 	proto "github.com/golang/protobuf/proto"
 )

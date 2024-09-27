@@ -14,9 +14,9 @@ import (
 
 var (
 	git                     = "git"
-	repoOwner               = flag.String("github_repo_owner", "", "the owner user/organization to use for github api requests")
-	repo                    = flag.String("github_repo", "", "the repo to use for github api requests")
-	githubEnterpriseHost    = flag.String("github_enterprise_host", "", "The host name of the private enterprise github, e.g. git.corp.adobe.com")
+	repoOwner               = flag.String("github_app_repo_owner", "", "the owner user/organization to use for github api requests")
+	repo                    = flag.String("github_app_repo", "", "the repo to use for github api requests")
+	githubEnterpriseHost    = flag.String("github_app_enterprise_host", "", "The host name of the private enterprise github, e.g. git.corp.adobe.com")
 	message                 = flag.String("message", "", "Message to send")
 	privateKey              = flag.String("private_key", "/var/run/agent-secrets/buildkite-agent/secrets/github-pr-creator-key", "Private Key")
 	gitHubAppId             = flag.Int64("github_app_id", 257131, "GitHub App Id")
@@ -27,10 +27,10 @@ var (
 
 func CreatePR(from, to, title, body string) error {
 	if *repoOwner == "" {
-		return errors.New("github_repo_owner must be set")
+		return errors.New("github_app_repo_owner must be set")
 	}
 	if *repo == "" {
-		return errors.New("github_repo must be set")
+		return errors.New("github_app_repo must be set")
 	}
 
 	ctx := context.Background()
