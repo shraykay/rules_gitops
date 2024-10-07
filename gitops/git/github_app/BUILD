@@ -7,6 +7,6 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//vendor/github.com/bradleyfalzon/ghinstallation/v2:go_default_library",
-        "@com_github_google_go_github_v32//:go_default_library",
+        "//vendor/github.com/google/go-github/v63/github:go_default_library",
     ],
 )
