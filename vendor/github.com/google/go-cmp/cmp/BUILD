@@ -5,8 +5,6 @@ go_library(
     srcs = [
         "compare.go",
         "export.go",
-        "export_panic.go",
-        "export_unsafe.go",
         "options.go",
         "path.go",
         "report.go",

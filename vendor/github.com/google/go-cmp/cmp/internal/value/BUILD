@@ -5,8 +5,6 @@ go_library(
     srcs = [
         "name.go",
         "pointer.go",
-        "pointer_purego.go",
-        "pointer_unsafe.go",
         "sort.go",
     ],
     importmap = "github.com/fasterci/rules_gitops/vendor/github.com/google/go-cmp/cmp/internal/value",
