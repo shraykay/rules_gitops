@@ -9,7 +9,7 @@ import (
 	"net/http"
 
 	"github.com/bradleyfalzon/ghinstallation/v2"
-	"github.com/google/go-github/v63/github"
+	"github.com/google/go-github/v58/github"
 )
 
 var (
