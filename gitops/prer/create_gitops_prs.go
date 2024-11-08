@@ -52,14 +52,15 @@ func (i *SliceFlags) Set(value string) error {
 }
 
 var (
-	releaseBranch          = flag.String("release_branch", "master", "filter gitops targets by release branch")
-	bazelCmd               = flag.String("bazel_cmd", "tools/bazel", "bazel binary to use")
-	workspace              = flag.String("workspace", "", "path to workspace root")
-	repo                   = flag.String("git_repo", "", "git repo location")
-	gitMirror              = flag.String("git_mirror", "", "git mirror location, like /mnt/mirror/bitbucket.tubemogul.info/tm/repo.git for jenkins")
-	gitopsPath             = flag.String("gitops_path", "cloud", "location to store files in repo.")
-	gitopsTmpDir           = flag.String("gitops_tmpdir", os.TempDir(), "location to check out git tree with /cloud.")
-	target                 = flag.String("target", "//... except //experimental/...", "target to scan. Useful for debugging only")
+	targets       string
+	releaseBranch = flag.String("release_branch", "master", "filter gitops targets by release branch")
+	bazelCmd      = flag.String("bazel_cmd", "tools/bazel", "bazel binary to use")
+	workspace     = flag.String("workspace", "", "path to workspace root")
+	repo          = flag.String("git_repo", "", "git repo location")
+	gitMirror     = flag.String("git_mirror", "", "git mirror location, like /mnt/mirror/bitbucket.tubemogul.info/tm/repo.git for jenkins")
+	gitopsPath    = flag.String("gitops_path", "cloud", "location to store files in repo.")
+	gitopsTmpDir  = flag.String("gitops_tmpdir", os.TempDir(), "location to check out git tree with /cloud.")
+	//target                 = flag.String("target", "//... except //experimental/...", "target to scan. Useful for debugging only")
 	pushParallelism        = flag.Int("push_parallelism", 1, "Number of image pushes to perform concurrently")
 	prInto                 = flag.String("gitops_pr_into", "master", "use this branch as the source branch and target for deployment PR")
 	prBody                 = flag.String("gitops_pr_body", "", "a body message for deployment PR")
@@ -75,6 +76,7 @@ var (
 )
 
 func init() {
+	flag.StringVar(&targets, "targets", "//... except //experimental/...", "targets to scan. Multiple targets can be provided separated by a +")
 	flag.Var(&gitopsKind, "gitops_dependencies_kind", "dependency kind(s) to run during gitops phase. Can be specified multiple times. Default is 'k8s_container_push'")
 	flag.Var(&gitopsRuleName, "gitops_dependencies_name", "dependency name(s) to run during gitops phase. Can be specified multiple times. Default is empty")
 	flag.Var(&gitopsRuleAttr, "gitops_dependencies_attr", "dependency attribute(s) to run during gitops phase. Use attribute=value format. Can be specified multiple times. Default is empty")
@@ -126,8 +128,9 @@ func main() {
 		log.Fatalf("unknown vcs host: %s", *gitHost)
 	}
 
-	q := fmt.Sprintf("attr(deployment_branch, \".+\", attr(release_branch_prefix, \"%s\", kind(gitops, %s)))", *releaseBranch, *target)
+	q := fmt.Sprintf("attr(deployment_branch, \".+\", attr(release_branch_prefix, \"%s\", kind(gitops, %s)))", *releaseBranch, targets)
 	qr := bazelQuery(q)
+	//qr := strings.Split(targets, ",")
 	releaseTrains := make(map[string][]string)
 	for _, t := range qr.Results {
 		var releaseTrain string
