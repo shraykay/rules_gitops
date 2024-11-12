@@ -1681,7 +1681,7 @@
   "moduleExtensions": {
     "//gitops:extensions.bzl%toolchains": {
       "general": {
-        "bzlTransitiveDigest": "FGf6BOQWyrk5QqZcZ36h4LUJ8pF2gr/29tiriEROGDo=",
+        "bzlTransitiveDigest": "H8VsDkGdZ0T3w3KKB8e4qKJEX2ZBxMR8kpl9z0+StKQ=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},

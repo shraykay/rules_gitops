@@ -1,0 +1,33 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "canonical_text.go",
+        "hash.go",
+        "key_generation.go",
+        "keys.go",
+        "keys_test_data.go",
+        "read.go",
+        "read_write_test_data.go",
+        "write.go",
+    ],
+    importmap = "github.com/fasterci/rules_gitops/vendor/github.com/ProtonMail/go-crypto/openpgp",
+    importpath = "github.com/ProtonMail/go-crypto/openpgp",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/armor:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/ecdh:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/ecdsa:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/ed25519:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/ed448:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/eddsa:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/errors:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/internal/algorithm:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/internal/ecc:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/packet:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/x25519:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/x448:go_default_library",
+        "//vendor/golang.org/x/crypto/sha3:go_default_library",
+    ],
+)

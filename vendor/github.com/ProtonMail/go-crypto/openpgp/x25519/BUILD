@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["x25519.go"],
+    importmap = "github.com/fasterci/rules_gitops/vendor/github.com/ProtonMail/go-crypto/openpgp/x25519",
+    importpath = "github.com/ProtonMail/go-crypto/openpgp/x25519",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/aes/keywrap:go_default_library",
+        "//vendor/github.com/ProtonMail/go-crypto/openpgp/errors:go_default_library",
+        "//vendor/github.com/cloudflare/circl/dh/x25519:go_default_library",
+        "//vendor/golang.org/x/crypto/hkdf:go_default_library",
+    ],
+)
