@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"time"
 
 	"github.com/bradleyfalzon/ghinstallation/v2"
 	"github.com/google/go-github/v58/github"
@@ -197,9 +196,9 @@ func pushCommit(ctx context.Context, gh *github.Client, ref *github.Reference, t
 	parent.Commit.SHA = parent.SHA
 
 	// Create the commit using the tree.
-	date := time.Now()
-	author := &github.CommitAuthor{Date: &github.Timestamp{Time: date}, Name: gitHubAppName, Email: &authorEmail}
-	commit := &github.Commit{Author: author, Message: &commitMessage, Tree: tree, Parents: []*github.Commit{parent.Commit}}
+	// date := time.Now()
+	// author := &github.CommitAuthor{Date: &github.Timestamp{Time: date}, Name: gitHubAppName, Email: &authorEmail}
+	commit := &github.Commit{Message: &commitMessage, Tree: tree, Parents: []*github.Commit{parent.Commit}}
 	opts := github.CreateCommitOptions{}
 
 	newCommit, _, err := gh.Git.CreateCommit(ctx, *repoOwner, *repo, commit, &opts)
